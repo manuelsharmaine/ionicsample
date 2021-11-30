@@ -13,5 +13,35 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <!-- <app-explore-container name="Tab 1 page"></app-explore-container> -->
+
+  <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+   
+    <ion-list>
+      <ion-input type="hidden" formControlName="id"></ion-input>
+      <ion-item>
+          <ion-label position="floating">Title</ion-label>
+          <ion-input type="text" formControlName="title"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Description</ion-label>
+        <ion-input type="text" formControlName="description"></ion-input>
+    </ion-item>
+  </ion-list>
+
+    <ion-button type="submit">Submit</ion-button>
+    <ion-button *ngIf="enableEdit" type="submit">Update</ion-button>
+
+
+    <ion-list>
+        <ion-item *ngFor="let task of tasks">
+          <ion-label>{{task.title}}</ion-label>
+          <ion-button  id="{{task.id}}" (click)="editTask($event)" slot="end">Edit </ion-button>
+          <ion-button id="{{task.id}}"  (click)="deleteTask($event)" slot="end"> Delete </ion-button>
+        </ion-item>
+    </ion-list>
+
+
+  </form>
+
 </ion-content>
